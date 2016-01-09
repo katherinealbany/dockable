@@ -1,0 +1,5 @@
+###################################################################################################
+
+- shell: SUDO_FORCE_REMOVE=yes apt-get purge --quiet --yes --auto-remove sudo curl wget python python-yaml python-jinja2 openssh-server && rm -rf /var/run/sshd && rm -rf /root/.ssh
+
+###################################################################################################

@@ -1,0 +1,85 @@
+###################################################################################################
+
+- name: default | target
+
+  when: dockable_target is not defined
+     or dockable_target is none
+     or dockable_target | length == 0
+
+  set_fact:
+    dockable_target: '{{ dockable_target_default }}'
+
+###################################################################################################
+
+- name: tcp | target
+
+  when: "dockable_target | truncate({{ dockable_target_tcp | length }}, true, '') == '{{ dockable_target_tcp }}'"
+
+  include: tcp.target.yml
+
+###################################################################################################
+
+- name: unix | target
+
+  when: "dockable_target | truncate({{ dockable_target_unix | length }}, true, '') == '{{ dockable_target_unix }}'"
+
+  include: unix.target.yml
+
+###################################################################################################
+
+- name: verify | target
+
+  command: '{{ dockable_base_command }} version'
+
+  register: version
+
+  changed_when: false
+  failed_when : version.rc != 0 or 'server' not in version.stdout | lower
+
+###################################################################################################
+
+- name: kill | container
+
+  when: dockable_container is defined
+    and dockable_container is not none
+    and dockable_container | length > 0
+
+  include: kill.container.yml
+
+###################################################################################################
+
+- name: run | container
+
+  command: '{{ dockable_base_command }} run -dp {{ dockable_expose_port }} {% if dockable_container is defined and dockable_container is not none and dockable_container | length > 0 %}--name {{ dockable_container }}{% endif %} {{ dockable_image_signature }}'
+
+  register: run
+
+###################################################################################################
+
+- name: discover | port
+
+  shell: "{{ dockable_base_command }} port {{ run.stdout }} {{ dockable_expose_port }} | awk -F':' '{print $2}'"
+
+  register: port
+
+  changed_when: false
+
+###################################################################################################
+
+- name: wait | up
+
+  local_action: wait_for host={{ dockable_ssh_host }}
+                         port={{ port.stdout }}
+                        state=started
+
+###################################################################################################
+
+- name: add | host
+
+  add_host:    name={{ dockable_container | default(run.stdout | truncate(12, true, '')) }}
+   ansible_ssh_user={{ dockable_ssh_user                                                 }}
+   ansible_ssh_host={{ dockable_ssh_host                                                 }}
+   ansible_ssh_port={{ port.stdout                                                       }}
+             groups={{ dockable_group                                                    }}
+
+###################################################################################################

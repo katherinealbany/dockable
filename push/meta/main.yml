@@ -1,0 +1,10 @@
+###################################################################################################
+
+dependencies:
+
+  - { role: commit                                                 ,
+      dockable_commit_repository: '{{ dockable_push_repository }}' ,
+      dockable_commit_name      : '{{ dockable_push_name       }}' ,
+      dockable_commit_tag       : '{{ dockable_push_tag        }}' }
+
+###################################################################################################

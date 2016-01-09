@@ -1,0 +1,8 @@
+###################################################################################################
+
+dockable_push_repository: katherinealbany
+dockable_push_name      : dockable
+dockable_push_tag       : '{{ inventory_hostname }}'
+dockable_push_signature : '{{ dockable_push_repository }}/{{ dockable_push_name }}:{{ dockable_push_tag }}'
+
+###################################################################################################

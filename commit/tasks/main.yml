@@ -1,0 +1,13 @@
+###################################################################################################
+
+- sudo: false
+  local_action: shell docker stop {{ inventory_hostname }}
+
+- sudo: false
+  local_action: shell docker commit {{ inventory_hostname }}
+  register: commit
+
+- sudo: false
+  local_action: shell docker tag --force {{ commit.stdout }} {{ dockable_commit_signature }}
+
+###################################################################################################
