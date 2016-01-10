@@ -4,24 +4,6 @@ require 'rake'
 
 ###################################################################################################
 
-task :build do
-  sh 'docker build --no-cache=true --tag=katherinealbany/dockable:v1.0.0 build'
-end
-
-###################################################################################################
-
-task :tag => [:build] do
-  sh 'docker tag -f katherinealbany/dockable:v1.0.0 katherinealbany/dockable:latest'
-end
-
-###################################################################################################
-
-task :push => [:tag] do
-  sh 'docker push katherinealbany/dockable'
-end
-
-###################################################################################################
-
 task :provision do
   sh 'ansible-playbook provision.yml -vv'
 end
