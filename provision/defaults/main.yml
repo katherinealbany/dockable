@@ -17,7 +17,7 @@ dockable_base_command: docker -H {{ dockable_target }}
 
 dockable_image_repository: katherinealbany
 dockable_image_name      : dockable
-dockable_image_tag       : latest
+dockable_image_tag       : stable
 dockable_image_signature : '{{ dockable_image_repository }}/{{ dockable_image_name }}:{{ dockable_image_tag }}'
 
 ###################################################################################################
