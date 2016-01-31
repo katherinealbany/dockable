@@ -8,7 +8,9 @@ MAINTAINER Katherine Albany
 
 ###################################################################################################
 
-RUN apt-get update && apt-get install --no-install-recommends --quiet --yes                       \
+RUN apt-get update                                                                                \
+ && DEBIAN_FRONTEND=noninteractive                                                                \
+    apt-get install --no-install-recommends -y                                                    \
     sudo                                                                                          \
     curl                                                                                          \
     wget                                                                                          \
@@ -26,8 +28,7 @@ ADD dockable.pub /root/.ssh/authorized_keys
 
 RUN mkdir -m 0755 /var/run/sshd                                                                   \
  && chmod -c 0600 /etc/ssh/sshd_config                                                            \
- && chmod -c 0600 /root/.ssh/authorized_keys                                                      \
- && find /var/log -type f -exec dd if=/dev/null of={} > /dev/null 2>&1 \;
+ && chmod -c 0600 /root/.ssh/authorized_keys
 
 ###################################################################################################
 
