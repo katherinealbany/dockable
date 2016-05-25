@@ -7,7 +7,7 @@
   register: kill
 
   changed_when:  kill.rc == 0
-  failed_when : "kill.rc != 0 and 'No such container: {{ dockable_container }}' not in kill.stderr"
+  failed_when : "kill.rc != 0 and 'Cannot kill container {{ dockable_container }}' not in kill.stderr"
 
 ###################################################################################################
 

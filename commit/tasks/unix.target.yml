@@ -1,0 +1,31 @@
+###################################################################################################
+
+- name: unix | target | discover | socket
+
+  command: "expr substr '{{ dockable_target }}' {{ dockable_target_unix | length + 1 }} {{ dockable_target | length }}"
+
+  register: discover
+
+  changed_when: false
+
+###################################################################################################
+
+- name: unix | target | examine | socket
+
+  stat: path={{ discover.stdout }}
+
+  register: examine
+
+###################################################################################################
+
+- name: unix | target | verify | socket
+
+  assert:
+    that:
+
+      - '{{ examine.stat.exists }}'
+      - '{{ examine.stat.issock }}'
+      - '{{ examine.stat.rusr   }} or {{ examine.stat.rgrp }} or {{ examine.stat.roth }}'
+      - '{{ examine.stat.wusr   }} or {{ examine.stat.wgrp }} or {{ examine.stat.woth }}'
+
+###################################################################################################

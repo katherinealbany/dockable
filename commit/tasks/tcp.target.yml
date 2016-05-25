@@ -1,0 +1,36 @@
+###################################################################################################
+
+- name: tcp | target | discover | host
+
+  shell: 'echo {{ dockable_target }} | cut -d : -f 2 | cut -d / -f 3'
+
+  register: host
+
+  changed_when: false
+
+###################################################################################################
+
+- name: tcp | target | discover | port
+
+  shell: 'echo {{ dockable_target }} | cut -d : -f 3'
+
+  register: port
+
+  changed_when: false
+
+###################################################################################################
+
+- name: tcp | target | verify | socket
+
+  wait_for: host={{ host.stdout }}
+            port={{ port.stdout }}
+           state=started
+
+###################################################################################################
+
+- name: tcp | target | configure | ssh
+
+  set_fact:
+    dockable_ssh_host: '{{ host.stdout }}'
+
+###################################################################################################
