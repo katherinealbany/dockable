@@ -4,17 +4,6 @@
 
 ###################################################################################################
 
-dockable_target        : "{{ lookup('env','DOCKER_HOST') }}"
-dockable_target_tcp    : tcp://
-dockable_target_unix   : unix://
-dockable_target_default: '{{ dockable_target_unix }}/var/run/docker.sock'
-
-###################################################################################################
-
-dockable_base_command: docker -H {{ dockable_target }}
-
-###################################################################################################
-
 dockable_image_repository: katherinealbany
 dockable_image_name      : dockable
 dockable_image_tag       : stable

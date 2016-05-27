@@ -1,43 +1,5 @@
 ###################################################################################################
 
-- name: default | target
-
-  when: dockable_target is not defined
-     or dockable_target is none
-     or dockable_target | length == 0
-
-  set_fact:
-    dockable_target: '{{ dockable_target_default }}'
-
-###################################################################################################
-
-- name: tcp | target
-
-  when: "dockable_target | truncate({{ dockable_target_tcp | length }}, true, '') == '{{ dockable_target_tcp }}'"
-
-  include: tcp.target.yml
-
-###################################################################################################
-
-- name: unix | target
-
-  when: "dockable_target | truncate({{ dockable_target_unix | length }}, true, '') == '{{ dockable_target_unix }}'"
-
-  include: unix.target.yml
-
-###################################################################################################
-
-- name: verify | target
-
-  command: '{{ dockable_base_command }} version'
-
-  register: version
-
-  changed_when: false
-  failed_when : version.rc != 0 or 'server' not in version.stdout | lower
-
-###################################################################################################
-
 - name: kill | container
 
   when: dockable_container is defined
