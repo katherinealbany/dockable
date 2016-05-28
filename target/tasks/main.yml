@@ -30,9 +30,9 @@
 
   command: '{{ dockable_base_command }} version'
 
-  register: version
+  register: verify
 
   changed_when: false
-  failed_when : version.rc != 0 or 'server' not in version.stdout | lower
+  failed_when : verify.rc != 0 or 'server' not in verify.stdout | lower
 
 ###################################################################################################
