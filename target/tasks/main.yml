@@ -2,8 +2,7 @@
 
 - name: default
 
-  when: dockable_target is not defined
-     or dockable_target is none
+  when: dockable_target is none
      or dockable_target | length == 0
 
   set_fact:
