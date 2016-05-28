@@ -1,6 +1,6 @@
 ###################################################################################################
 
-- name: tcp | target | discover | host
+- name: tcp | discover | host
 
   shell: 'echo {{ dockable_target }} | cut -d : -f 2 | cut -d / -f 3'
 
@@ -10,7 +10,7 @@
 
 ###################################################################################################
 
-- name: tcp | target | discover | port
+- name: tcp | discover | port
 
   shell: 'echo {{ dockable_target }} | cut -d : -f 3'
 
@@ -20,7 +20,7 @@
 
 ###################################################################################################
 
-- name: tcp | target | verify | socket
+- name: tcp | verify | socket
 
   wait_for: host={{ host.stdout }}
             port={{ port.stdout }}
@@ -28,7 +28,7 @@
 
 ###################################################################################################
 
-- name: tcp | target | configure | ssh
+- name: tcp | configure | ssh
 
   set_fact:
     dockable_ssh_host: '{{ host.stdout }}'

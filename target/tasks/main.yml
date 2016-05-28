@@ -1,6 +1,6 @@
 ###################################################################################################
 
-- name: default | target
+- name: default
 
   when: dockable_target is not defined
      or dockable_target is none
@@ -11,7 +11,7 @@
 
 ###################################################################################################
 
-- name: tcp | target
+- name: tcp
 
   when: "dockable_target | truncate({{ dockable_target_tcp | length }}, true, '') == '{{ dockable_target_tcp }}'"
 
@@ -19,7 +19,7 @@
 
 ###################################################################################################
 
-- name: unix | target
+- name: unix
 
   when: "dockable_target | truncate({{ dockable_target_unix | length }}, true, '') == '{{ dockable_target_unix }}'"
 
@@ -27,7 +27,7 @@
 
 ###################################################################################################
 
-- name: verify | target
+- name: verify
 
   command: '{{ dockable_base_command }} version'
 

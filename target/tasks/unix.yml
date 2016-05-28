@@ -1,6 +1,6 @@
 ###################################################################################################
 
-- name: unix | target | discover | socket
+- name: unix | discover | socket
 
   command: "expr substr '{{ dockable_target }}' {{ dockable_target_unix | length + 1 }} {{ dockable_target | length }}"
 
@@ -10,7 +10,7 @@
 
 ###################################################################################################
 
-- name: unix | target | examine | socket
+- name: unix | examine | socket
 
   stat: path={{ discover.stdout }}
 
@@ -18,7 +18,7 @@
 
 ###################################################################################################
 
-- name: unix | target | verify | socket
+- name: unix | verify | socket
 
   assert:
     that:
