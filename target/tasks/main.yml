@@ -15,7 +15,7 @@
 
   when: "dockable_target | truncate({{ dockable_target_tcp | length }}, true, '') == '{{ dockable_target_tcp }}'"
 
-  include: tcp.target.yml
+  include: tcp.yml
 
 ###################################################################################################
 
@@ -23,7 +23,7 @@
 
   when: "dockable_target | truncate({{ dockable_target_unix | length }}, true, '') == '{{ dockable_target_unix }}'"
 
-  include: unix.target.yml
+  include: unix.yml
 
 ###################################################################################################
 
