@@ -26,6 +26,8 @@
 
 ###################################################################################################
 
+### docker version --format '{{.Server.Version}}'
+
 - name: verify
 
   command: '{{ dockable_base_command }} version'
