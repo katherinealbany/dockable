@@ -8,6 +8,10 @@
   set_fact:
     dockable_target: '{{ dockable_target_default }}'
 
+  tags:
+    - dockable
+    - target
+
 ###################################################################################################
 
 - name: tcp
@@ -15,6 +19,11 @@
   when: "dockable_target | truncate({{ dockable_target_tcp | length }}, true, '') == '{{ dockable_target_tcp }}'"
 
   include: tcp.yml
+
+  tags:
+    - dockable
+    - target
+    - tcp
 
 ###################################################################################################
 
@@ -24,17 +33,21 @@
 
   include: unix.yml
 
-###################################################################################################
+  tags:
+    - dockable
+    - target
+    - unix
 
-### docker version --format '{{.Server.Version}}'
+###################################################################################################
 
 - name: verify
 
-  command: '{{ dockable_base_command }} version'
-
-  register: verify
+  command: docker version
 
   changed_when: false
-  failed_when : verify.rc != 0 or 'server' not in verify.stdout | lower
+
+  tags:
+    - dockable
+    - target
 
 ###################################################################################################
