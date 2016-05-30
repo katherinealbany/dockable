@@ -9,3 +9,13 @@ dockable_target_tcp : tcp://
 dockable_target_unix: unix://
 
 ###################################################################################################
+
+dockable_target_is_null: dockable_target is none or dockable_target | length == 0
+dockable_target_is_tcp : dockable_target | truncate({{ dockable_target_tcp  | length }}, true, '') == '{{ dockable_target_tcp  }}'
+dockable_target_is_unix: dockable_target | truncate({{ dockable_target_unix | length }}, true, '') == '{{ dockable_target_unix }}'
+
+###################################################################################################
+
+dockable_verify_command: '{{ dockable_base_command }} version'
+
+###################################################################################################

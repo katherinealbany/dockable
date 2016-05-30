@@ -2,8 +2,7 @@
 
 - name: default
 
-  when: dockable_target is none
-     or dockable_target | length == 0
+  when: dockable_target_is_null
 
   set_fact:
     dockable_target: '{{ dockable_target_default }}'
@@ -16,7 +15,7 @@
 
 - name: tcp
 
-  when: "dockable_target | truncate({{ dockable_target_tcp | length }}, true, '') == '{{ dockable_target_tcp }}'"
+  when: dockable_target_is_tcp
 
   include: tcp.yml
 
@@ -29,7 +28,7 @@
 
 - name: unix
 
-  when: "dockable_target | truncate({{ dockable_target_unix | length }}, true, '') == '{{ dockable_target_unix }}'"
+  when: dockable_target_is_unix
 
   include: unix.yml
 
@@ -42,7 +41,7 @@
 
 - name: verify
 
-  command: docker version
+  command: '{{ dockable_verify_command }}'
 
   changed_when: false
 
