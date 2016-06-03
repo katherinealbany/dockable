@@ -2,7 +2,8 @@
 
 - name: default
 
-  when: dockable_target is none or dockable_target | trim | length == 0
+  when: dockable_target is none
+     or dockable_target | trim | length == 0
 
   set_fact:
     dockable_target: '{{ dockable_target_default }}'
