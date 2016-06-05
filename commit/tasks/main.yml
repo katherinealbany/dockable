@@ -1,13 +1,13 @@
 ###################################################################################################
 
-- sudo: false
+- become: false
   shell: '{{ dockable_base_command }} stop {{ dockable_container }}'
 
-- sudo: false
+- become: false
   shell: '{{ dockable_base_command }} commit {{ dockable_container }}'
   register: commit
 
-- sudo: false
+- become: false
   shell: '{{ dockable_base_command }} tag --force {{ commit.stdout }} {{ dockable_commit_signature }}'
 
 ###################################################################################################
