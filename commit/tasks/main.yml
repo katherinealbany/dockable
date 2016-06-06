@@ -1,13 +1,10 @@
 ###################################################################################################
 
-- become: false
-  shell: '{{ dockable_base_command }} stop {{ dockable_container }}'
+- shell: '{{ dockable_base_command }} stop {{ dockable_container }}'
 
-- become: false
-  shell: '{{ dockable_base_command }} commit {{ dockable_container }}'
+- shell: '{{ dockable_base_command }} commit {{ dockable_container }}'
   register: commit
 
-- become: false
-  shell: '{{ dockable_base_command }} tag --force {{ commit.stdout }} {{ dockable_commit_signature }}'
+- shell: '{{ dockable_base_command }} tag --force {{ commit.stdout }} {{ dockable_commit_signature }}'
 
 ###################################################################################################

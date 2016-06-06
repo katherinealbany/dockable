@@ -1,6 +1,6 @@
 ###################################################################################################
 
-dockable_target        : "{{ lookup('env','DOCKER_HOST') }}"
+#dockable_target        : "{{ lookup('env','DOCKER_HOST') }}"
 dockable_target_default: '{{ dockable_target_unix }}/var/run/docker.sock'
 
 ###################################################################################################

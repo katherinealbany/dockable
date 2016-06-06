@@ -30,7 +30,7 @@
 
 - name: wait | up
 
-  local_action: wait_for host={{ dockable_ssh_host }}
+  wait_for: host={{ dockable_ssh_host }}
                          port={{ port.stdout }}
                         state=started
 
