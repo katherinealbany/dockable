@@ -6,7 +6,7 @@
     and dockable_container is not none
     and dockable_container | length > 0
 
-  include: kill.container.yml
+  docker_container: name={{ dockable_container }} force_kill=true state=absent
 
 ###################################################################################################
 
@@ -31,8 +31,8 @@
 - name: wait | up
 
   wait_for: host={{ dockable_ssh_host }}
-                         port={{ port.stdout }}
-                        state=started
+            port={{ port.stdout       }}
+           state=started
 
 ###################################################################################################
 
