@@ -1,10 +1,15 @@
 ###################################################################################################
 
-- shell: '{{ dockable_base_command }} stop {{ dockable_container }}'
+- with_items: "{{ groups['containers'] }}"
+  shell: '{{ dockable_base_command }} stop {{ item }}'
 
-- shell: '{{ dockable_base_command }} commit {{ dockable_container }}'
+- with_items: "{{ groups['containers'] }}"
+  shell: '{{ dockable_base_command }} commit {{ item }}'
   register: commit
 
-- shell: '{{ dockable_base_command }} tag --force {{ commit.stdout }} {{ dockable_commit_signature }}'
+- debug: var=commit
+
+- with_items: "{{ commit.results }}"
+  shell: '{{ dockable_base_command }} tag --force {{ item.stdout }} {{ dockable_commit_signature }}'
 
 ###################################################################################################
