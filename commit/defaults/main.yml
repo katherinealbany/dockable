@@ -2,7 +2,7 @@
 
 dockable_commit_repository: katherinealbany
 dockable_commit_name      : dockable
-dockable_commit_tag       : '{{ inventory_hostname }}'
+#dockable_commit_tag       : '{{ inventory_hostname }}'
 dockable_commit_signature : '{{ dockable_commit_repository }}/{{ dockable_commit_name }}:{{ dockable_commit_tag }}'
 
 ###################################################################################################

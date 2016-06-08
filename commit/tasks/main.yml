@@ -1,6 +1,11 @@
 ###################################################################################################
 
 - with_items: "{{ groups['containers'] }}"
+  debug: var=item
+
+- debug: var=hostvars
+
+- with_items: "{{ groups['containers'] }}"
   shell: '{{ dockable_base_command }} stop {{ item }}'
 
 - with_items: "{{ groups['containers'] }}"
