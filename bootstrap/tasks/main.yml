@@ -1,5 +1,20 @@
 ###################################################################################################
 
+- name: debian | dependencies
+
+  when: "'{{ ansible_os_family | lower }}' == 'debian'"
+
+  with_items: '{{ bootstrap_dependencies }}'
+
+  apt : name={{ item }} state=present install_recommends=false
+
+  tags:
+    - dockable
+    - bootstrap
+    - debian
+
+###################################################################################################
+
 - name: pip | dependencies
 
   with_items: '{{ bootstrap_pip_dependencies }}'
