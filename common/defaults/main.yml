@@ -24,3 +24,9 @@ dockable_image_signature : '{{ dockable_image_repository }}/{{ dockable_image_na
 dockable_group: containers
 
 ###################################################################################################
+
+dockable_system      : '{{ ansible_system       | lower }}'
+dockable_os_family   : '{{ ansible_os_family    | lower }}'
+dockable_architecture: '{{ ansible_architecture | lower }}'
+
+###################################################################################################

@@ -2,7 +2,7 @@
 
 - name: debian | dependencies
 
-  when: "'{{ ansible_os_family | lower }}' == 'debian'"
+  when: "'{{ dockable_os_family }}' == 'debian'"
 
   with_items: '{{ bootstrap_dependencies }}'
 
